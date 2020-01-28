@@ -12,10 +12,12 @@
 }
 .orderItem_content{
     display:inline-block;
-    width:calc(100%-100px);
+    width:-moz-calc(100% - 100px);
+    width:-webkit-calc(100% - 100px);
+    width:calc(100% - 100px);
 }
 .orderItem_product{
-    min-width:270px;
+    max-width:270px;
     font-size:17px;
     font-weight:700;
     color:#111;
@@ -58,8 +60,6 @@
     color:#fff;
     border:0;
     font-size:14px;
-    position:absolute;
-    right:0;
 }
 .orderItem_btn-red{
     background-color:#e9203d;
