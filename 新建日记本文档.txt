@@ -1,0 +1,92 @@
+React16实现订单列表及评价功能项目
+
+知识点：
+
+JSX语法
+
+Props：组件对外的接口（外部组件通过props将一些数据和方法传递给当前组件使用，所以props是外部组件或父组件与子组件通信的一个接口）
+
+state：组件对内的接口（组件内部的一个接口，用于维护组件内部的状态）
+
+组件生命周期：
+
+参考React官网(加粗的方法即经常使用的方法，有些生命周期方法在将来会被弃用，不推荐使用)
+
+
+受控组件：
+
+非受控组件：
+
+
+技术点：
+
+1、项目结构创建
+
+npm install -g create-react-app   //全局安装create-react-app脚手架
+
+create-react-app demo01   //新建项目名
+
+cd demo01
+
+npm install
+
+npm start
+
+2、组件划分
+
+App
+
+头部
+Header文件夹(index.js 方便文件引入  style.css)
+
+订单内容
+OrderList文件夹(index.js 方便文件引入  style.css)
+
+OrderItem属于OrderList组件的一部分，在OrderList组件中引用OrderItem组件
+
+订单列表组件OrderList/index.js  包括多个OrderItem组件
+
+Es6 map语法渲染出多个订单项组件
+
+
+OrderItem文件夹（index.js 方便文件引入  style.css）
+
+订单项组件OrderItem/index.js
+
+产品名称+商品名称+价格+评价
+
+
+3、ajax请求获取订单数据
+
+（1）创建mock数据，利用fetch API去获取mock数据
+（2）创建mock数据可以直接放在public文件夹下（public --> mock -->orders.json）,public文件夹下直接放置的就是静态资源，不会参与webpack最终的打包过程
+（3）在组件完成挂载时获取mock数据
+
+//路径：通过create-react-app创建出来的项目，public文件夹下的静态资源是可以直接通过http请求方式获取到的，所以mock的第一级路径对应的是public下面的文件夹
+
+componentDidMount(){
+        fetch("/mock/orders.json").then(res=>{  
+            if(res.ok){
+                res.json().then(data=>{
+                    this.setState({
+                        data
+                    })
+                })
+            }
+        })
+   }
+
+4、评价功能
+
+1、直接在OrderItem组件中完成订单评价功能的开发
+
+在renderEditArea()方法中完成评价功能UI的绘制，由于五角星功能比较复杂，再通过renderStars()方法完成五角星功能
+
+ES6的map语法渲染出5颗五角星
+
+2、将评价功能抽离成一个组件，在OrderItem组件中引入该组件（该方法数据流传递的层级比较多，会经历2个层级的数据传递，不建议使用）
+
+
+
+
+
